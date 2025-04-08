@@ -1,0 +1,106 @@
+﻿@model IEnumerable<BOROMOTORS.Models.DirtBike>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+
+<section class="bikes-section">
+    <h2>Нашите мотори</h2>
+    <p class="subtitle">Избери най-подходящия за теб</p>
+
+    <!-- Създаване на нов мотор (само за админ) -->
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        <div style="text-align: center; margin-bottom: 30px;">
+            <a asp-action="Create" class="btn btn-outline-success">
+                ➕ Създай нов мотор
+            </a>
+        </div>
+    }
+            <!-- Range Цена -->
+            <div class="mb-2">
+                <label>Цена от:</label>
+                <input type="number" name="minPrice" class="form-control" placeholder="Мин" style="width: 150px; display: inline-block;" />
+
+                <label>до:</label>
+                <input type="number" name="maxPrice" class="form-control" placeholder="Макс" style="width: 150px; display: inline-block;" />
+            </div>      
+        <!-- Dropdown за марка -->
+        <div class="mb-2">
+            <label>Марка:</label>
+            <select name="manufacturer" class="form-control" style="max-width: 200px; display:inline-block;">
+                <option value="">Всички</option>
+                @foreach (var m in (List<string>)ViewBag.Manufacturers)
+                {
+                    <option value="@m">@m</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-outline-light mt-2">Приложи филтри</button>
+    <!-- RANGE SLIDER -->
+    <div class="mb-4">
+        <label style="color: #ccc;">Избери ценови диапазон:</label><br />
+        <input type="range" name="minPrice" id="minRange" min="0" max="20000" step="500"
+               value="@Context.Request.Query["minPrice"]" oninput="updateLabel()" />
+        <input type="range" name="maxPrice" id="maxRange" min="0" max="20000" step="500"
+               value="@Context.Request.Query["maxPrice"]" oninput="updateLabel()" />
+        <p style="color: #ff4500; font-weight: bold;">
+            От <span id="minLabel">0</span> лв до <span id="maxLabel">20000</span> лв
+        </p>
+    </div>
+
+   
+    <script>
+        function updateLabel() {
+            document.getElementById('minLabel').textContent = document.getElementById('minRange').value;
+            document.getElementById('maxLabel').textContent = document.getElementById('maxRange').value;
+        }
+
+        window.onload = updateLabel;
+    </script>
+
+    <!-- 🔍 Търсене + Сортиране -->
+    <form method="get" asp-action="Index" style="text-align:center; margin-bottom: 20px;">
+        <input type="text" name="searchString" value="@ViewData["CurrentFilter"]"
+               class="form-control"
+               placeholder="🔍 Търси по модел или марка..."
+               style="max-width: 400px; display:inline-block; margin-right: 10px;" />
+        <button type="submit" class="btn btn-outline-light">Търси</button>
+    </form>
+
+    <div style="text-align:center; margin-bottom: 30px;">
+        <a asp-action="Index" asp-route-sortOrder="price_asc" class="btn btn-outline-info btn-sm">⬇️ Най-евтини</a>
+        <a asp-action="Index" asp-route-sortOrder="price_desc" class="btn btn-outline-info btn-sm">⬆️ Най-скъпи</a>
+    </div>
+
+    <!-- 🏍️ Карти с моторите -->
+    <div class="bike-list">
+        @foreach (var item in Model)
+        {
+            <div class="bike-card">
+                <img src="@item.ImageUrl" alt="@item.Model" />
+
+                <h3>@item.Model</h3>
+                <p class="price">@String.Format("{0:N2}", item.Price) лв.</p>
+                <p>@item.Description</p>
+
+                <!-- 💨 Икони за характеристики -->
+                <div style="display: flex; justify-content: center; gap: 20px; margin: 10px 0;">
+                    <span class="animated-icon">💨 @item.Horsepower HP</span>
+                    <span class="animated-icon">⚡ @item.TopSpeed km/h</span>
+                </div>
+
+                <!-- 🔧 Бутоните за админ -->
+                @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
+                    <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 15px;">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning btn-sm">🖊️ Редактирай</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">✖️ Изтрий</a>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</section>

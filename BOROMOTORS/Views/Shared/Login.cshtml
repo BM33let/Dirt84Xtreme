@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Login - BOROMOTORS";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/Style.css" />
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-form">
+            <h2>Welcome Back!</h2>
+            <p class="description">Please log in to continue enjoying all the features of BOROMOTORS.</p>
+            <form method="post">
+                <div class="form-group">
+                    <label for="Email">Email</label>
+                    <input type="email" class="form-control" id="Email" placeholder="Enter your email" required />
+                </div>
+                <div class="form-group">
+                    <label for="Password">Password</label>
+                    <input type="password" class="form-control" id="Password" placeholder="Enter your password" required />
+                </div>
+                <div class="form-options">
+                    <label class="checkbox">
+                        <input type="checkbox" /> Remember me
+                    </label>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn login-btn">Login</button>
+            </form>
+            <p class="register-link">New to BOROMOTORS? <a href="/register">Sign up here</a></p>
+        </div>
+    </div>
+</body>
+</html>
