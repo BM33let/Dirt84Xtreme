@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<div class="auth-container">
+    <h2 class="auth-title">Регистрирай се и подготви мотора!</h2>
+
+    <form asp-action="Register" method="post">
+        <div class="form-group">
+            <label for="email">Имейл:</label>
+            <input type="text" class="form-control" name="email" required />
+        </div>
+        <div class="form-group">
+            <label for="password">Парола:</label>
+            <input type="password" class="form-control" name="password" required />
+        </div>
+        <button type="submit" class="btn btn-ride">Старт!</button>
+    </form>
+</div>
+
+<p class="text-center mt-3">
+    Вече имаш акаунт? <a class="register-link" asp-controller="Account" asp-action="Login">Влез тук</a>
+</p>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger custom-error">
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}

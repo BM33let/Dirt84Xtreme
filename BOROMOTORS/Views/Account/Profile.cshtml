@@ -1,0 +1,23 @@
+﻿@model Microsoft.AspNetCore.Identity.IdentityUser
+
+@{
+    ViewData["Title"] = "Профил";
+}
+
+<div class="profile-container">
+    <h2 class="text-warning text-center mb-4">👤 Профил на потребителя</h2>
+
+    <div class="profile-card">
+        <p><strong>Имейл:</strong> @Model.Email</p>
+        <p><strong>Потребителско име:</strong> @Model.UserName</p>
+        <p><strong>Дата на регистрация:</strong> (тук може да се добави, ако се пази)</p>
+
+        <a href="#" class="btn btn-outline-warning mt-3">Редактирай профила</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
