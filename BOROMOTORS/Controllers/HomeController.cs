@@ -12,6 +12,10 @@ namespace BOROMOTORS.Controllers
         {
             _logger = logger;
         }
+        public IActionResult Contact()
+        {
+            return View();
+        }
 
         public IActionResult Index()
         {
@@ -39,5 +43,3 @@ public class HomeController : Controller
         return View();  // Това ще изведе Views/Home/Reviews.cshtml
     }
 }
-
-

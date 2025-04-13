@@ -33,6 +33,27 @@ namespace BOROMOTORS.Controllers
             ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Name");
             return View();
         }
+        [HttpGet]
+        [Microsoft.AspNetCore.Authorization.Authorize]
+        public async Task<IActionResult> MyOrders()
+        {
+            var userEmail = User.Identity.Name;
+            var customer = await _context.Customers
+                .FirstOrDefaultAsync(c => c.Email == userEmail);
+
+            if (customer == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var orders = await _context.Orders
+                .Where(o => o.CustomerId == customer.Id)
+                .Include(o => o.DirtBike)
+                .ToListAsync();
+
+            return View("MyOrders", orders);
+        }
+
 
         // POST: Order/Create
         [HttpPost]

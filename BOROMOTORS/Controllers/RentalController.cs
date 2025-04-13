@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using BOROMOTORS.Data;
 using BOROMOTORS.Models;
 using System;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace BOROMOTORS.Controllers
 {
@@ -29,10 +31,24 @@ namespace BOROMOTORS.Controllers
                 return NotFound();
             }
 
-            var rental = new Rental { MotorId = motor.Id, Price = motor.PricePerDay };      
+            var rental = new Rental { MotorId = motor.Id, Price = motor.PricePerDay };
 
             return View(rental);
         }
+        [Authorize]
+        public async Task<IActionResult> MyOrders()
+        {
+            var userEmail = User.Identity.Name;
+            var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Email == userEmail);
+
+            var orders = await _context.Orders
+                .Where(o => o.CustomerId == customer.Id)
+                .Include(o => o.DirtBike)
+                .ToListAsync();
+
+            return View(orders);
+        }
+
 
         [HttpPost]
         public IActionResult Rent(Rental rental)

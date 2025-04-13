@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BOROMOTORS.Models.Order>
+
+<h2 class="text-warning">📦 Моите поръчки</h2>
+
+@if (!Model.Any())
+{
+    <p>Нямате поръчки още.</p>
+}
+else
+{
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Мотор</th>
+                <th>Дата</th>
+                <th>Цена</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var o in Model)
+            {
+                <tr>
+                    <td>@o.Id</td>
+                    <td>@o.DirtBike?.Model</td>
+                    <td>@o.OrderDate.ToString("dd.MM.yyyy")</td>
+                    <td>@o.TotalPrice лв.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

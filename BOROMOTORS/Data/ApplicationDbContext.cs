@@ -7,13 +7,17 @@ namespace BOROMOTORS.Data
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
+        internal object Event;
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<DirtBike> DirtBikes { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Order> Orders { get; set; }
+        public DbSet<BOROMOTORS.Models.Order> Orders { get; set; }
         public DbSet<Rental> Rentals { get; set; }
         public DbSet<Motor> Motors { get; set; }  // Увери се, че имаш този модел
+
+        public object Events { get; internal set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

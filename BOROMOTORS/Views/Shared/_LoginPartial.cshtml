@@ -1,26 +1,29 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
 
-<ul class="navbar-nav ml-auto">
-    @if (SignInManager.IsSignedIn(User))
-    {
+@if (SignInManager.IsSignedIn(User))
+{
+    <ul class="navbar-nav d-flex align-items-center">
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, @User.Identity?.Name!</a>
+            <a class="nav-link fw-bold text-warning d-flex align-items-center gap-2" asp-controller="Account" asp-action="Profile">
+                🏍️ Здравей, райдър!
+            </a>
         </li>
         <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            <form asp-controller="Account" asp-action="Logout" method="post">
+                <button type="submit" class="btn btn-ride ms-2">Изход</button>
             </form>
         </li>
-    }
-    else
-    {
+    </ul>
+}
+else
+{
+    <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            <a class="nav-link text-warning" asp-controller="Account" asp-action="Login">Вход</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            <a class="nav-link text-warning" asp-controller="Account" asp-action="Register">Регистрация</a>
         </li>
-    }
-</ul>
+    </ul>
+}

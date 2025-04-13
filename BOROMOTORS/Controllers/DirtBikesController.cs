@@ -19,8 +19,8 @@ namespace BOROMOTORS.Controllers
             _context = context;
         }
 
-        // GET: DirtBikes
-        public async Task<IActionResult> Index(string searchString, string sortOrder, int? minPrice, int? maxPrice, string manufacturer)
+        // GET: DirtBikesz
+        public async Task<IActionResult> Index(string searchString, string sortOrder, int? minPrice, int? maxPrice, string manufacturer, string category)
         {
             ViewData["CurrentFilter"] = searchString;
             ViewData["PriceSortParm"] = string.IsNullOrEmpty(sortOrder) ? "price_desc" : "";
@@ -57,6 +57,11 @@ namespace BOROMOTORS.Controllers
                     query = query.OrderBy(b => b.Price);
                     break;
             }
+            if (!string.IsNullOrEmpty(category))
+            {
+                query = query.Where(b => b.Category == category); // увери се, че имаш такова property
+            }
+
 
             // За dropdown-а: взимаме различните марки от базата
             ViewBag.Manufacturers = await _context.DirtBikes.Select(b => b.Manufacturer).Distinct().ToListAsync();

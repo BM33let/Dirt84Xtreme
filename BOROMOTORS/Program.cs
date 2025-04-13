@@ -1,4 +1,4 @@
-using BOROMOTORS.Data;
+п»їusing BOROMOTORS.Data;
 using BOROMOTORS.Data.Seeder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -47,9 +47,9 @@ app.UseAuthorization();
 // Route configuration
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}"); // Маршрут по подразбиране
+    pattern: "{controller=Home}/{action=Index}/{id?}"); // ГЊГ Г°ГёГ°ГіГІ ГЇГ® ГЇГ®Г¤Г°Г Г§ГЎГЁГ°Г Г­ГҐ
 
-// Map Razor Pages (за акаунти)
+// Map Razor Pages (Г§Г  Г ГЄГ ГіГ­ГІГЁ)
 app.MapRazorPages();
 
 app.Run();
