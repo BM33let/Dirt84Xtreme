@@ -9,10 +9,10 @@ namespace BOROMOTORS.Models.Admin
 
 
         [Required]
-        public string UserId { get; set; } // За връзка с потребителя
+        public required string UserId { get; set; } // За връзка с потребителя
 
         [Required]
-        public string BikeModel { get; set; } // Име на мотора
+        public required string BikeModel { get; set; } // Име на мотора
 
         [Required]
         public decimal Price { get; set; } // Цена на поръчката

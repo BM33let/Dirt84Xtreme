@@ -11,7 +11,7 @@
         public string? ImageUrl { get; set; }
         public string? VideoUrl { get; set; }
         public string? TopSpeed { get; set; }
-        public string Category { get; set; }
+        public required string Category { get; set; }
         public int? Horsepower { get; set; }
         public int? Weight { get; set; }
     }

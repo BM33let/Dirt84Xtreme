@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BOROMOTORS.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250413114849_AddCategoryToDirtBikes")]
-    partial class AddCategoryToDirtBikes
+    [Migration("20250419111332_AddCategoryToDirtBike")]
+    partial class AddCategoryToDirtBike
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

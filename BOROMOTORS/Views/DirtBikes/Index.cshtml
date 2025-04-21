@@ -29,6 +29,47 @@
     <a asp-action="Index" asp-route-sortOrder="price_desc" class="btn btn-outline-info">⬆️ Най-скъпи</a>
 </div>
 
+<!-- Стилизиране -->
+<style>
+    .bike-list {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+    }
+
+    .bike-card {
+        background-color: #1e1e1e;
+        padding: 20px;
+        border-radius: 8px;
+        width: 250px;
+        text-align: center;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+
+        .bike-card img {
+            width: 100%;
+            height: auto;
+        }
+
+    .bike-name, .bike-price {
+        color: #ff6f00;
+    }
+
+    .add-to-cart-btn {
+        background-color: #ff6f00;
+        padding: 10px;
+        border: none;
+        color: white;
+        width: 100%;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .add-to-cart-btn:hover {
+            background-color: #ff4500;
+        }
+</style>
+
 
 
 <!-- 🏍️ Нов изглед с карти (до 3 в ред) -->

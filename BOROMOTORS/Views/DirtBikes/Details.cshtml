@@ -77,11 +77,10 @@
     </dl>
 </div>
 
-<!-- Пример с псевдокод -->
-{% if user.is_authenticated %}
-  {% if user.is_admin %}S
-<button>Добави</button>
-<button>Редактирай</button>
-<button>Изтрий</button>
-  {% endif %}
-{% endif %}
+
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <button class="btn btn-primary">Добави</button>
+    <button class="btn btn-warning">Редактирай</button>
+    <button class="btn btn-danger">Изтрий</button>
+}
