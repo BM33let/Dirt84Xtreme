@@ -7,6 +7,7 @@ namespace BOROMOTORS.Models
         public int TotalBikes { get; set; }
         public decimal AveragePrice { get; set; }
         public decimal CheapestBike { get; set; }
+        public decimal LowestPrice { get; set; }
         public string TopManufacturer { get; set; }
     }
 }
