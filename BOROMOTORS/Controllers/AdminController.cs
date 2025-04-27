@@ -30,8 +30,10 @@ public class AdminController : Controller
             TotalBikes = total,
             AveragePrice = avg.GetValueOrDefault(),
             CheapestBike = min.GetValueOrDefault(),
+            LowestPrice = min.GetValueOrDefault(),
             TopManufacturer = top
         };
+
 
         return View(vm);
     }
