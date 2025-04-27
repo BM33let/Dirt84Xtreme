@@ -1,0 +1,32 @@
+﻿@model List<BOROMOTORS.Models.DirtBike>
+
+<div class="container mt-5">
+    <h2 class="text-warning mb-4">🛒 Твоята количка</h2>
+
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-info">
+            Все още нямате добавени мотори в количката.
+        </div>
+    }
+    else
+    {
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th>Модел</th>
+                    <th>Цена</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var bike in Model)
+                {
+                    <tr>
+                        <td>@bike.Model</td>
+                        <td>@bike.Price лв.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
